@@ -29,7 +29,7 @@ mock_carriers = {
 }
 
 @app.route('/get-carriers', methods=['GET'])
-def get_transporters():
+def get_carriers():
     from_city = request.args.get('from_city', '').strip()
     to_city = request.args.get('to_city', '').strip()
 
@@ -40,13 +40,13 @@ def get_transporters():
         return jsonify({"error": "Una o ambas ciudades no son válidas."}), 400
 
     if from_city_enum == City.NEW_YORK and to_city_enum == City.WASHINGTON_DC:
-        transporters = mock_carriers["NY-DC"]
+        carriers = mock_carriers["NY-DC"]
     elif from_city_enum == City.SAN_FRANCISCO and to_city_enum == City.LOS_ANGELES:
-        transporters = mock_carriers["SF-LA"]
+        carriers = mock_carriers["SF-LA"]
     else:
-        transporters = mock_carriers["default"]
+        carriers = mock_carriers["default"]
 
-    return jsonify(transporters)
+    return jsonify(carriers)
 
 if __name__ == '__main__':
     app.run(debug=True)
