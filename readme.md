@@ -22,10 +22,11 @@ Error (400): If one or both city names are invalid.
 Example Request:
 
 ## bash
+```sh
 curl -X GET "http://localhost:5000/get-carriers?from_city=New%20York&to_city=Washington%20DC"
+```
 
 ## Example Response:
-
 json
 [
   {"name": "Knight-Swift Transport Services", "trucks_per_day": 10},
@@ -54,3 +55,11 @@ FedEx Corp: 9 trucks/day
 
 ## Database model
 ![image](https://github.com/user-attachments/assets/176b5cc9-bfc7-40ed-9b20-49ba86ce1b83)
+
+## Runs de unit tests
+```sh
+cd tests
+pytest test_app.py
+```
+![image](https://github.com/user-attachments/assets/ca539401-f59e-4aaf-b894-cfef6d7b9457)
+
