@@ -1,7 +1,9 @@
 from flask import Flask, jsonify, request
+from flask_cors import CORS
 from enum import Enum
 
 app = Flask(__name__)
+CORS(app)
 
 class City(Enum):
     NEW_YORK = "New York"
