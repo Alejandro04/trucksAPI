@@ -11,13 +11,16 @@ class City(Enum):
     MIAMI = "Miami"
     CHICAGO = "Chicago"
 
+def create_route_key(from_city: City, to_city: City) -> str:
+    return f"{from_city.name}-{to_city.name}"
+
 mock_carriers = {
-    "NY-DC": [
+    create_route_key(City.NEW_YORK, City.WASHINGTON_DC): [
         {"name": "Knight-Swift Transport Services", "trucks_per_day": 10},
         {"name": "J.B. Hunt Transport Services Inc", "trucks_per_day": 7},
         {"name": "YRC Worldwide", "trucks_per_day": 5},
     ],
-    "SF-LA": [
+    create_route_key(City.SAN_FRANCISCO, City.LOS_ANGELES): [
         {"name": "XPO Logistics", "trucks_per_day": 9},
         {"name": "Schneider", "trucks_per_day": 6},
         {"name": "Landstar Systems", "trucks_per_day": 2},
@@ -39,12 +42,8 @@ def get_carriers():
     except ValueError:
         return jsonify({"error": "One or both cities are not valid."}), 400
 
-    if from_city_enum == City.NEW_YORK and to_city_enum == City.WASHINGTON_DC:
-        carriers = mock_carriers["NY-DC"]
-    elif from_city_enum == City.SAN_FRANCISCO and to_city_enum == City.LOS_ANGELES:
-        carriers = mock_carriers["SF-LA"]
-    else:
-        carriers = mock_carriers["default"]
+    route_key = create_route_key(from_city_enum, to_city_enum)
+    carriers = mock_carriers.get(route_key, mock_carriers["default"])
 
     return jsonify(carriers)
 
