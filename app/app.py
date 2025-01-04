@@ -37,7 +37,7 @@ def get_carriers():
         from_city_enum = City(from_city)
         to_city_enum = City(to_city)
     except ValueError:
-        return jsonify({"error": "Una o ambas ciudades no son válidas."}), 400
+        return jsonify({"error": "One or both cities are not valid."}), 400
 
     if from_city_enum == City.NEW_YORK and to_city_enum == City.WASHINGTON_DC:
         carriers = mock_carriers["NY-DC"]
