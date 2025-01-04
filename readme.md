@@ -51,3 +51,6 @@ Default Route (Other Cities):
 
 UPS Inc.: 11 trucks/day
 FedEx Corp: 9 trucks/day
+
+## Database model
+![image](https://github.com/user-attachments/assets/176b5cc9-bfc7-40ed-9b20-49ba86ce1b83)
