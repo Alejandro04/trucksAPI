@@ -1,0 +1,60 @@
+CREATE TABLE cities (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL UNIQUE
+);
+
+CREATE TABLE routes (
+    id SERIAL PRIMARY KEY,
+    from_city_id INT NOT NULL,
+    to_city_id INT NOT NULL,
+    FOREIGN KEY (from_city_id) REFERENCES cities(id),
+    FOREIGN KEY (to_city_id) REFERENCES cities(id)
+);
+
+CREATE TABLE carriers (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL UNIQUE
+);
+
+CREATE TABLE carrier_routes (
+    id SERIAL PRIMARY KEY,
+    carrier_id INT NOT NULL,
+    route_id INT NOT NULL,
+    trucks_per_day INT NOT NULL,
+    FOREIGN KEY (carrier_id) REFERENCES carriers(id),
+    FOREIGN KEY (route_id) REFERENCES routes(id)
+);
+
+ALTER TABLE carrier_routes ALTER COLUMN route_id DROP NOT NULL;
+
+INSERT INTO cities (name) VALUES
+    ('New York'),
+    ('Washington DC'),
+    ('San Francisco'),
+    ('Los Angeles'),
+    ('Miami'),
+    ('Chicago');
+
+INSERT INTO routes (from_city_id, to_city_id) VALUES
+    ((SELECT id FROM cities WHERE name = 'New York'), (SELECT id FROM cities WHERE name = 'Washington DC')),
+    ((SELECT id FROM cities WHERE name = 'San Francisco'), (SELECT id FROM cities WHERE name = 'Los Angeles'));
+
+INSERT INTO carriers (name) VALUES
+    ('Knight-Swift Transport Services'),
+    ('J.B. Hunt Transport Services Inc'),
+    ('YRC Worldwide'),
+    ('XPO Logistics'),
+    ('Schneider'),
+    ('Landstar Systems'),
+    ('UPS Inc.'),
+    ('FedEx Corp');
+
+INSERT INTO carrier_routes (carrier_id, route_id, trucks_per_day) VALUES
+    ((SELECT id FROM carriers WHERE name = 'Knight-Swift Transport Services'), (SELECT id FROM routes WHERE from_city_id = (SELECT id FROM cities WHERE name = 'New York') AND to_city_id = (SELECT id FROM cities WHERE name = 'Washington DC')), 10),
+    ((SELECT id FROM carriers WHERE name = 'J.B. Hunt Transport Services Inc'), (SELECT id FROM routes WHERE from_city_id = (SELECT id FROM cities WHERE name = 'New York') AND to_city_id = (SELECT id FROM cities WHERE name = 'Washington DC')), 7),
+    ((SELECT id FROM carriers WHERE name = 'YRC Worldwide'), (SELECT id FROM routes WHERE from_city_id = (SELECT id FROM cities WHERE name = 'New York') AND to_city_id = (SELECT id FROM cities WHERE name = 'Washington DC')), 5),
+    ((SELECT id FROM carriers WHERE name = 'XPO Logistics'), (SELECT id FROM routes WHERE from_city_id = (SELECT id FROM cities WHERE name = 'San Francisco') AND to_city_id = (SELECT id FROM cities WHERE name = 'Los Angeles')), 9),
+    ((SELECT id FROM carriers WHERE name = 'Schneider'), (SELECT id FROM routes WHERE from_city_id = (SELECT id FROM cities WHERE name = 'San Francisco') AND to_city_id = (SELECT id FROM cities WHERE name = 'Los Angeles')), 6),
+    ((SELECT id FROM carriers WHERE name = 'Landstar Systems'), (SELECT id FROM routes WHERE from_city_id = (SELECT id FROM cities WHERE name = 'San Francisco') AND to_city_id = (SELECT id FROM cities WHERE name = 'Los Angeles')), 2),
+    ((SELECT id FROM carriers WHERE name = 'UPS Inc.'), NULL, 11),
+    ((SELECT id FROM carriers WHERE name = 'FedEx Corp'), NULL, 9);
