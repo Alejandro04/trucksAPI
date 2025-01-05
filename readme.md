@@ -61,5 +61,5 @@ FedEx Corp: 9 trucks/day
 cd tests
 pytest test_app.py
 ```
-![image](https://github.com/user-attachments/assets/ca539401-f59e-4aaf-b894-cfef6d7b9457)
+![image](https://github.com/user-attachments/assets/322b54f2-0f99-4c70-bf75-590ee7d0489d)
 
