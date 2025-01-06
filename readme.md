@@ -44,18 +44,18 @@ json
 The service includes the following predefined data:
 
 Routes and Transporters
-New York to Washington DC:
 
+New York to Washington DC:
 Knight-Swift Transport Services: 10 trucks/day
 J.B. Hunt Transport Services Inc: 7 trucks/day
 YRC Worldwide: 5 trucks/day
-San Francisco to Los Angeles:
 
+San Francisco to Los Angeles:
 XPO Logistics: 9 trucks/day
 Schneider: 6 trucks/day
 Landstar Systems: 2 trucks/day
-Default Route (Other Cities):
 
+Default Route (Other Cities):
 UPS Inc.: 11 trucks/day
 FedEx Corp: 9 trucks/day
 
