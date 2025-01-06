@@ -14,7 +14,7 @@ Default Routing: Returns general transporters for any unspecified routes.
 Enum Validation: Ensures valid city names through an enumeration.
 
 ## Endpoints
-GET /get-carriers
+GET /carriers
 Returns a list of transporters for a given origin and destination city.
 
 ## Query Parameters:
@@ -29,7 +29,7 @@ Example Request:
 
 ## bash
 ```sh
-curl -X GET "http://localhost:5000/get-carriers?from_city=New%20York&to_city=Washington%20DC"
+curl -X GET "http://localhost:5000/carriers?from_city=New%20York&to_city=Washington%20DC"
 ```
 
 ## Example Response:
