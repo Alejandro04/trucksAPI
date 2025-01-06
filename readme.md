@@ -2,6 +2,12 @@
 
 The Carriers Service API is a lightweight Flask-based backend that provides transport company details based on the specified origin and destination cities. It includes predefined routes and carriers for common routes and defaults to general carriers for other routes.
 
+## System Overview
+### Frontend: 
+Hosted as a static website on Amazon S3, optimized for scalability and cost-efficiency.
+### Backend/API: 
+Deployed on an Amazon EC2 instance to handle the business logic using an wsgi.py file and the command ```sh nohup gunicorn --bind 0.0.0.0:8000 wsgi:app &``` to leave the process running in the background
+
 ## Features
 City-based Routing: Provides transporters for specific city pairs.
 Default Routing: Returns general transporters for any unspecified routes.
